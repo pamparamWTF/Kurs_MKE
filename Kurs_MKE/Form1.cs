@@ -225,7 +225,7 @@ namespace Kurs_Proekt
         {
             List<SortedSet<int>> map = new List<SortedSet<int>>();
 
-            for (int i = 0; i < N; i++)
+            for (int i = 0; i < 3 * N; i++)
             {
                 map.Add(new SortedSet<int>());
             }
@@ -302,8 +302,12 @@ namespace Kurs_Proekt
 
                         for (int local_num = 0; local_num < 8; local_num++)
                         {
-                            _elements[i + (j + k * (_meshY.Count - 1)) * (_meshX.Count - 1)].Node_global.Add(new int());
-                            _elements[i + (j + k * (_meshY.Count - 1)) * (_meshX.Count - 1)].Node_global[local_num] = (i + local_num % 2) + ((j + (local_num / 2) % 2) + (k + local_num / 4) * _meshY.Count) * _meshX.Count;
+                            for (int b = 0; b < 3; b++)
+                            {
+                                _elements[i + (j + k * (_meshY.Count - 1)) * (_meshX.Count - 1)].Node_global.Add(new int());
+                                _elements[i + (j + k * (_meshY.Count - 1)) * (_meshX.Count - 1)].Node_global[3 * local_num + b] = 3 * ((i + local_num % 2) + ((j + (local_num / 2) % 2) + (k + local_num / 4) * _meshY.Count) * _meshX.Count) + b;
+
+                            }
 
                             _elements[i + (j + k * (_meshY.Count - 1)) * (_meshX.Count - 1)].coord_Nodes_In_Elemet.Add(new Coord_Node { X = _meshX[i + local_num % 2].coord_Nodes, Y = _meshY[j + (local_num / 2) % 2].coord_Nodes, Z = _meshZ[k + local_num / 4].coord_Nodes });
                         }
